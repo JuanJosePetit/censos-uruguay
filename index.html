@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/clases.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/funciones.js"></script>
+    <title>Censo 2023</title>
+</head>
+
+<body>
+    <!--Html del censista-->
+    <div class="card" id="divLogin">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Iniciar sesión</h2>
+        <form>
+            <div class="form-group">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="username" placeholder="Ingrese su nombre de usuario"
+                    value="juancho">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" placeholder="Ingrese su contraseña"
+                    value="Juan123">
+            </div>
+            <div class="form-group">
+                <input type="button" value="Iniciar sesión" id="loginCensista">
+                <input type="button" value="Registrarse" id="btnMostrarRegistro">
+                <input type="button" value="Ingresar como invitado" id="ingresarComoInvitado1">
+            </div>
+        </form>
+    </div>
+
+    <div class="card" id="divUsuarioLogeado">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Bienvenido <span id="spanUsuarioLogueado"></span></h2>
+        <p id="mostrarDefensa"></p>
+        <input type="button" value="Ingresar datos para censar" id="btnMostrarIngresarCensoCensista">
+        <input type="button" value="consulta de datos para validar" id="btnMostrarMisCensos">
+        <input type="button" value="Reasignación de censo" id="btnMostrarReasignacion">
+        <input type="button" value="Visualización de información estadística " id="btnMostrarEstadisticasCensista">
+        <input type="button" value="Cerrar sesion" id="btnLogout">
+    </div>
+
+    <div class="card" id="divRegistro">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Registro</h2>
+        <form id="formRegistro">
+            <div class="form-group">
+                <label for="nombreReg">Nombre y apellido:</label>
+                <input type="text" id="nombreReg" name="nombreReg" placeholder="Ingrese su nombre y apellido"
+                    value="juan petit">
+            </div>
+            <div class="form-group">
+                <label for="usuarioReg">Usuario:</label>
+                <input type="text" id="usuarioReg" name="username" placeholder="Ingrese su nombre de usuario"
+                    value="juancho">
+            </div>
+            <div class="form-group">
+                <label for="passwordReg">Contraseña:</label>
+                <input type="password" id="passwordReg" name="password" placeholder="Ingrese su contraseña"
+                    value="Juan123">
+            </div>
+            <div class="form-group">
+                <input type="button" value="Registrarse" id="btnRegistrarse">
+                <input type="button" value="Ingresar como invitado" id="ingresarComoInvitado2">
+            </div>
+        </form>
+    </div>
+
+    <div class="card" id="buscarCedulaCensista">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Buscar cedula</h2>
+        <form id="formBuscarCedulaCensista">
+            <div class="form-group">
+                <label for="cedulaCenso">Cédula:</label>
+                <input type="text" id="inputBuscarCedulaCensista" value="63906752" required>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Buscar" id="btnBuscarCedulaCensista">
+            </div>
+        </form>
+    </div>
+
+    <div class="card" id="divMostrarEstadiscasCensista">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Estadisticas</h2>
+        <div class="form-group">
+            <label for="pEstadisticasTotalPersonas">Total de personas censadas hasta el momento</label>
+            <p id="pEstadisticasTotalPersonas"></p>
+            <label for="pEstadisticasCantidadPersonasPorDepartamento"> Cantidad de personas censadas para
+                cadadepartamento.</label>
+            <select id="cantidadDepartamentoEstadisticas" required>
+                <option></option>
+            </select>
+            <p id="pEstadisticasCantidadPersonasPorDepartamento"></p>
+            <label for="pEstadisticasPorcentajePersonasPendientes">Porcentaje de personas pendientes de validar sus
+                datos respecto al total de personas.</label>
+            <p id="pEstadisticasPorcentajePersonasPendientes"></p>
+            <label for="departamentoEstadisticas">Seleccione un Departamento</label>
+            <select id="departamentoEstadisticas" required>
+                <option></option>
+            </select>
+            <p id="pDepartamentoEstadisticas"></p>
+            <br><button onclick="cargarEstadisticas()">Calcular estadísticas</button>
+        </div>
+    </div>
+
+    <div class="card" id="divIngresoDeDatosCensista">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Ingresar datos para el censo</h2>
+        <form id="formIngresoCensoCensista">
+            <div class="form-group">
+                <label for="nombreCensoCensista">Nombres:</label>
+                <input type="text" id="nombreCensoCensista" value="juan" required>
+            </div>
+            <div class="form-group">
+                <label for="apeliidoCensoCensista">Apellidos:</label>
+                <input type="text" id="apeliidoCensoCensista" value="petit" required>
+            </div>
+            <div class="form-group">
+                <label for="edadCensoCensista">Edad:</label>
+                <input type="number" id="edadCensoCensista" min="0" max="130" value="23" required>
+                <label for="cedulaCensoCensista">Cédula:</label>
+                <input type="text" id="cedulaCensoCensista" name="id" value="63906752" required>
+            </div>
+            <div class="form-group">
+                <label for="departamentoCensoCensista">Departamento de residencia:</label>
+                <select id="departamentoCensoCensista" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+                <label for="ocupacionCensoCensista">Ocupación:</label>
+                <select id="ocupacionCensoCensista" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+            </div>
+            <input type="button" value="Ingresar Censo" id="btnIngresarCensoCensista">
+        </form>
+    </div>
+
+    <div class="card" id="divModificarDatosCensista">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Modifique los datos</h2>
+        <form id="formModCensoCensista">
+            <div class="form-group">
+                <label for="nombreModCensoCensista">Nombres:</label>
+                <input type="text" id="nombreModCensoCensista" required>
+            </div>
+            <div class="form-group">
+                <label for="apeliidoModCensoCensista">Apellidos:</label>
+                <input type="text" id="apeliidoModCensoCensista" required>
+            </div>
+            <div class="form-group">
+                <label for="edadModCensoCensista">Edad:</label>
+                <input type="number" id="edadModCensoCensista" min="0" max="130" required>
+                <label for="cedulaModCensoCensista">Cédula:</label>
+                <input type="text" id="cedulaModCensoCensista" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="departamentoModCensoCensista">Departamento de residencia:</label>
+                <select id="departamentoModCensoCensista" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+                <label for="ocupacionModCensoCensista">Ocupación:</label>
+                <select id="ocupacionModCensoCensista" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Modificar" id="btnModCensoCensista">
+            </div>
+        </form>
+    </div>
+
+    <div class="card" id="divConsultaCensos">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Censos por validar</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Edad</td>
+                    <td>Cedula</td>
+                    <td>Departamento</td>
+                    <td>Ocupación</td>
+                    <td>Validar</td>
+                </tr>
+            </thead>
+            <tbody id="tablaMisCensos">
+                <tr>
+                    <td>Sin datos</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="divReasignacionDeCenso" class="card">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Reasignacion de censo</h2>
+        <div class="form-group">
+            <h3>Censo a reasignar</h3>
+            <select id="censosPendientes">
+                <option value="Seleccione...">Seleccione...</option>
+            </select>
+            <h3>Censista a reasignar</h3>
+            <select id="censistasDisponibles">
+                <option value="Seleccione...">Seleccione...</option>
+            </select>
+            <input type="button" id="btnReasignacion" value="Reasignar">
+        </div>
+    </div>
+    <!--Fin Html del censista-->
+    <!--Html del Invitado-->
+    <div class="card" id="buscarCedula">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Buscar cedula</h2>
+        <form id="formBuscarCedula">
+            <div class="form-group">
+                <label for="cedulaCenso">Cédula:</label>
+                <input type="text" id="inputBuscarCedula" value="63906752" required>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Buscar" id="btnBuscarCedula">
+            </div>
+        </form>
+        <div class="form-group">
+            <h2>Estadisticas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Departamento</td>
+                        <td>Estudian</td>
+                        <td>No trabajan</td>
+                        <td>Dependientes o independientes</td>
+                        <td>Porcentaje del total de censados</td>
+                    </tr>
+                </thead>
+                <tbody id="tablaEstadisticasInvitado">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card" id="divIngresoDeDatos">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Ingresar datos para el censo</h2>
+        <form id="formIngresoCenso">
+            <div class="form-group">
+                <label for="nombreCenso">Nombres:</label>
+                <input type="text" id="nombreCenso" value="juan" required>
+            </div>
+            <div class="form-group">
+                <label for="apeliidoCenso">Apellidos:</label>
+                <input type="text" id="apeliidoCenso" value="petit" required>
+            </div>
+            <div class="form-group">
+                <label for="edadCenso">Edad:</label>
+                <input type="number" id="edadCenso" min="0" max="130" value="23" required>
+                <label for="cedulaCenso">Cédula:</label>
+                <input type="text" id="cedulaCenso" name="id" value="63906752" required>
+            </div>
+            <div class="form-group">
+                <label for="departamentoCenso">Departamento de residencia:</label>
+                <select id="departamentoCenso" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+                <label for="ocupacionCenso">Ocupación:</label>
+                <select id="ocupacionCenso" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+            </div>
+            <input type="button" value="Ingresar Censo" id="btnIngresarCenso">
+        </form>
+    </div>
+
+    <div class="card" id="divModificarDatos">
+        <img src="https://municipioc.montevideo.gub.uy/sites/municipioc/files/styles/620x410/public/700x410_28.png?itok=i9HdfY0u"
+            id="img">
+        <h2>Modifique y/o elimine los datos</h2>
+        <form id="formModCenso">
+            <div class="form-group">
+                <label for="nombreModCenso">Nombres:</label>
+                <input type="text" id="nombreModCenso" required>
+            </div>
+            <div class="form-group">
+                <label for="apeliidoModCenso">Apellidos:</label>
+                <input type="text" id="apeliidoModCenso" required>
+            </div>
+            <div class="form-group">
+                <label for="edadModCenso">Edad:</label>
+                <input type="number" id="edadModCenso" min="0" max="130" required>
+                <label for="cedulaModCenso">Cédula:</label>
+                <input type="text" id="cedulaModCenso" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="departamentoModCenso">Departamento de residencia:</label>
+                <select id="departamentoModCenso" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+                <label for="ocupacionModCenso">Ocupación:</label>
+                <select id="ocupacionModCenso" required>
+                    <option value="Seleccione...">Seleccione...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Modificar" id="btnModCenso">
+                <input type="button" value="Eliminar" id="btnEliminarCenso">
+            </div>
+        </form>
+    </div>
+    <!--Fin Html del Invitado-->
+</body>
+
+</html>
